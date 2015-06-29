@@ -1,7 +1,7 @@
 #Facebook user
 
   #Attributes 
-    #name
+    #name 
     #birthday
     #email
     #password
@@ -20,6 +20,7 @@
 
 class User
 
+  #takes place of having to write long reader & writer methods
   attr_reader :email, :gender
   attr_writer :gender
 
@@ -35,10 +36,12 @@ class User
     #       }
   end
 
+  #Method not needed anymore with the attr_reader above
   # def email
   #   @email
   # end
 
+  #We don't want the password to be read
   def password
     "hah, no."
   end
@@ -47,7 +50,7 @@ class User
     @photos[name] = photos
   end
 
-  def list_albums
+  def list_albums #Lists the name of all our albumns
     @photos.keys
   end
 
@@ -57,27 +60,30 @@ class User
 
 end
 
-
+#Every user we create expects these three arguments to be passed in right away (name, email & password), as specified in our initialize method
 jamie = User.new("jamie", "jamie@pilgrim.com", "immapassword")
 ellie = User.new("ellie", "ellie@flatiron.com", "betterpassword")
 
 puts jamie.email
 
-#jamie.gender = "female"
+
+#Need to set female before we call it, as was set 
+jamie.gender = "female"
 puts jamie.gender
 
+#creates a new album. Remember to pass in two arguments, the comma after the album name is necessary. For consistency, name should be a symbol and photos should be entered in a hash, even if it's only one. 
+jamie.create_album(:flatiron, {"friday selfie" => "img_01.jpg", "Jeff Teaching" => "img_02.jpg"})
+jamie.create_album(:chicago, {"something" => "img_03.jpg", "something else" => "img_04.jpg"})
 
-# jamie.create_album(:flatiron, {"friday selfie" => "img_01.jpg", "Jeff Teaching" => "img_02.jpg"})
-# jamie.create_album(:chicago, {"something" => "img_03.jpg", "something else" => "img_04.jpg"})
+#Will put all the album titles available to the user specified. 
+puts jamie.list_albums
 
-# puts jamie.list_albums
+#specify album name by key, will return a list of all photo titles
+puts jamie.show_album_photos(:flatiron)
+puts jamie.show_album_photos(:chicago)
 
-# puts jamie.show_album_photos(:flatiron)
-# puts jamie.show_album_photos(:chicago)
-
-
-
-#puts ellie.password
+#Will laugh in our face
+puts ellie.password
 
 
 
